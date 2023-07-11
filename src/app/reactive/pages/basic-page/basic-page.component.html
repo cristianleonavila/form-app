@@ -1,0 +1,104 @@
+<h2>Reactivos: Básicos</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+
+        <form [formGroup]="basicForm" autocomplete="off" (ngSubmit)="onSubmit()">
+
+            <!-- Campo de producto -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Producto</label>
+                <div class="col-sm-9">
+
+                    <input type="text"
+                           class="form-control"
+                           placeholder="Nombre del producto"
+                           formControlName="name">
+
+                    <span class="form-text text-danger" 
+                          *ngIf="isFieldHasErrors('name')">
+                        {{ getFieldError('name') }}
+                    </span>                
+                </div>
+            </div>
+
+            <!-- Campo de producto -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Precio</label>
+                <div class="col-sm-9">
+                    <input type="number"
+                           class="form-control"
+                           placeholder="Precio del producto"
+                           formControlName="price">
+                    <span class="form-text text-danger" *ngIf="isFieldHasErrors('price')">
+                        {{getFieldError('price')}}
+                    </span>
+                </div>
+            </div>
+
+            <!-- Campo de existencias -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Existencias</label>
+                <div class="col-sm-9">
+                    <input type="number"
+                           class="form-control"
+                           placeholder="Existencias del producto"
+                           formControlName="inStorage">
+
+                    <span class="form-text text-danger" *ngIf="isFieldHasErrors('inStorage')">
+                        {{getFieldError('inStorage')}}
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit"
+                            class="btn btn-primary float-end">
+                        Guardar
+                    </button>
+                </div>
+            </div>
+        </form>
+        <h3>Debug</h3>
+        <hr>
+        <pre>
+{{ this.basicForm.value | json }}
+        </pre>
+
+    </div>
+</div>
+
+
+
+
+<div class="row">
+    <div class="col">
+
+        <span>Valid</span>
+        <pre>{{ basicForm.valid | json }}</pre>
+
+        <span>Pristine</span>
+        <pre>{{ basicForm.pristine | json }}</pre>
+
+        <span>Touched</span>
+        <pre>{{ basicForm.touched | json }}</pre>
+
+        <span>Value</span>
+        <pre>{{ this.basicForm.value | json }}</pre>
+
+        <span>Precio</span>
+        <pre>{{ this.basicForm.controls['price'].value | json }}</pre>
+
+        <span>Precio - Errores</span>
+        <pre>{{ this.basicForm.controls['price'].errors | json }}</pre>        
+
+        <span>Producto</span>
+        <pre>{{ this.basicForm.controls['name'].value | json }}</pre>
+
+        <span>Producto - Errores</span>
+        <pre>{{ this.basicForm.controls['name'].errors | json }}</pre>        
+    </div>
+</div>
