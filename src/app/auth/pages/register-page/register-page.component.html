@@ -4,7 +4,7 @@
 <div class="row">
     <div class="col">
 
-        <form autocomplete="off">
+        <form autocomplete="off" [formGroup]="registerFrm">
 
             <!-- Nombre -->
             <div class="row mb-3">
@@ -12,9 +12,10 @@
                 <div class="col-sm-9">
                     <input type="text"
                            class="form-control"
-                           placeholder="Nombre del usuario">
+                           placeholder="Nombre del usuario"
+                           formControlName="name">
 
-                    <span class="form-text text-danger">
+                    <span class="form-text text-danger" *ngIf="customValidator.isFieldHasErrors('name');">
                         Debe de ser en formato de nombre y apellido
                     </span>
                 </div>
@@ -26,9 +27,10 @@
                 <div class="col-sm-9">
                     <input type="email"
                            class="form-control"
-                           placeholder="Email del usuario">
-                    <span class="form-text text-danger">
-                        mensaje de error del email
+                           placeholder="Email del usuario"
+                           formControlName="email">
+                    <span class="form-text text-danger"  *ngIf="customValidator.isFieldHasErrors('email');">
+                        {{ customValidator.getFieldError('email')}}
                     </span>
                 </div>
             </div>
@@ -39,7 +41,8 @@
                 <div class="col-sm-9">
                     <input type="text"
                            class="form-control"
-                           placeholder="Nombre código del usuario">
+                           placeholder="Nombre código del usuario"
+                           formControlName="userName">
                     <span class="form-text text-danger">
                          El username no puede ser Strider
                     </span>
@@ -52,7 +55,8 @@
                 <div class="col-sm-9">
                     <input type="password"
                            class="form-control"
-                           placeholder="Password de su cuenta">
+                           placeholder="Password de su cuenta"
+                           formControlName="password">
 
                     <span class="form-text text-danger">
                          La contraseña debe de ser mayor de 6 caracteres.
@@ -66,7 +70,8 @@
                 <div class="col-sm-9">
                     <input type="password"
                            class="form-control"
-                           placeholder="Confirmar la contraseña">
+                           placeholder="Confirmar la contraseña"
+                           formControlName="passwordConfirmation">
 
                     <span class="form-text text-danger">
                          Las contraseñas deben de ser iguales
@@ -90,24 +95,32 @@
 </div>
 
 
-<h2>Form Valid: </h2>
-<h2>Form Status: </h2>
-<h2>Form Pending: </h2>
-<h2>Form errors</h2>
-<pre>{{ 'formulario' | json }}</pre>
+<h2>Form Valid: {{ registerFrm.valid }}</h2>
+<h2>Form Status: {{ registerFrm.status }}</h2>
+<h2>Form Pending: {{ registerFrm.pending }}</h2>
+<h2>Form errors </h2>
+<pre>{{ registerFrm.errors | json }}</pre>
 
 <h5>Nombre</h5>
-<pre>{{ 'formulario' | json }}</pre>
+<pre>{{ registerFrm.value.name | json }}</pre>
+
+<h5>Nombre Errors</h5>
+<pre>{{ registerFrm.controls['name'].errors | json }}</pre>
 
 <h5>Email</h5>
-<pre>{{ 'formulario' | json }}</pre>
+<pre>{{ registerFrm.value.email | json }}</pre>
+
+<h5>Email errors</h5>
+<pre>{{ registerFrm.controls['email'].errors | json }}</pre>
 
 <h5>Username</h5>
-<pre>{{ 'formulario' | json }}</pre>
+<pre>{{ registerFrm.value.userName | json }}</pre>
 
+<h5>Username Errors</h5>
+<pre>{{ registerFrm.controls['userName'].errors | json }}</pre>
 
 <h5>Password</h5>
-<pre>{{ 'formulario' | json }}</pre>
+<pre>{{ registerFrm.value.password | json }}</pre>
 
 <h5>Confirmar</h5>
-<pre>{{ 'formulario' | json }}</pre>
+<pre>{{ registerFrm.value.passwordConfirmation | json }}</pre>
